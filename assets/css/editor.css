@@ -1,0 +1,32 @@
+/**
+ * Editor-specific styles for Dashicons SVG Block.
+ *
+ * Visual styles (background, gradient, padding, margin, border-radius) are
+ * applied to the inner .rsdsb-inner-wrapper div via JavaScript with !important.
+ * The outer editor wrapper must be stripped of duplicated visual styles.
+ */
+
+[data-type="rsdsb/dashicon"].block-editor-block-list__block {
+	background: none !important;
+	background-color: transparent !important;
+	background-image: none !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	max-width: var(--wp--style--global--content-size) !important;
+}
+
+[data-type="rsdsb/dashicon"].has-background {
+	background: none !important;
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+[data-type="rsdsb/dashicon"][class*="has-"][class*="-background-color"] {
+	background: none !important;
+	background-color: transparent !important;
+}
+
+[data-type="rsdsb/dashicon"][class*="has-"][class*="-gradient-background"] {
+	background: none !important;
+	background-image: none !important;
+}

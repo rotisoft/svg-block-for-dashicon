@@ -1,0 +1,71 @@
+{
+  "translation-revision-date": "2026-02-15 13:00:00+00:00",
+  "generator": "Manual",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "plural-forms": "nplurals=2; plural=(n != 1);",
+        "lang": "hu_HU"
+      },
+      "Search icons…": [
+        "Ikonok keresése…"
+      ],
+      "Select unit": [
+        "Válassz mértékegységet"
+      ],
+      "No alignment": [
+        "Nincs igazítás"
+      ],
+      "Align left": [
+        "Balra igazítás"
+      ],
+      "Align center": [
+        "Középre igazítás"
+      ],
+      "Align right": [
+        "Jobbra igazítás"
+      ],
+      "SVG block for Dashicon": [
+        "SVG blokk Dashiconhoz"
+      ],
+      "Insert a WordPress Dashicon rendered as inline SVG.": [
+        "WordPress Dashicon ikon beszúrása inline SVG formátumban."
+      ],
+      "icon": [
+        "ikon"
+      ],
+      "dashicon": [
+        "dashikon"
+      ],
+      "svg": [
+        "svg"
+      ],
+      "Dashicon settings": [
+        "Dashicon beállítások"
+      ],
+      "Icon": [
+        "Ikon"
+      ],
+      "Icon styles": [
+        "Ikon stílusok"
+      ],
+      "Size": [
+        "Méret"
+      ],
+      "Alignment": [
+        "Igazítás"
+      ],
+      "Link settings": [
+        "Hivatkozás beállítások"
+      ],
+      "Link label (aria-label)": [
+        "Hivatkozás címke (aria-label)"
+      ],
+      "Descriptive text for screen readers, e.g. \"Go to homepage\".": [
+        "Leíró szöveg képernyőolvasók számára, pl. „Ugrás a főoldalra"."
+      ]
+    }
+  }
+}
