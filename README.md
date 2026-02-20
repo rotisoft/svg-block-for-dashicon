@@ -2,7 +2,7 @@
 
 Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SVG — fast, lightweight, and fully customizable.
 
-**Contributors:** rtomo  
+**Contributors:** [Tamas Rottenbacher](https://profiles.wordpress.org/rtomo/)  
 **Tags:** dashicons, svg, gutenberg, block, icons  
 **Requires at least:** 5.9  
 **Tested up to:** 6.9  
@@ -107,34 +107,6 @@ Yes. Fully internationalized. Hungarian included. WordPress 4.6+ loads translati
 ### Compatible with Classic Editor?
 
 No. Gutenberg-only block.
-
-## Screenshots
-
-1. Rendered inline SVG icon on the frontend  
-2. Dashicons SVG block selector in Gutenberg  
-3. Customization options: color, size, background, spacing, border  
-
-## Upgrade Notice
-
-### 1.3.0
-- Fix 100% border-radius  
-- Fix original SVG paths for 4 admin-site icons  
-- Increased accessibility  
-- Add `fit-content` width/height  
-- Gradient background support  
-- Link support  
-
-### 1.2.0
-- Rename plugin, slug, textdomain  
-- WPCS and ESLint fixes  
-- Block preview  
-
-### 1.1.0
-- Full i18n with Hungarian  
-- Minor changes  
-
-### 1.0.0
-- Initial release  
 
 ## Changelog
 
