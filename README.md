@@ -10,7 +10,7 @@ Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SV
 **Stable version:** 1.3.0  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
-**Donate:** https://rotisoft.hu/kapcsolat/
+**Donate:** [rotistudio.hu](https://rotistudio.hu/kapcsolat/)
 
 Hungarian: [Magyar nyelvű bővítmény leírás](https://rotistudio.hu/bovitmenyek/dashicon-svg-block/)
 
@@ -110,22 +110,4 @@ No. Gutenberg-only block.
 
 ## Changelog
 
-### 1.3.0
-- Fix 100% border-radius  
-- Fix original SVG paths for 4 admin-site icons  
-- Increased accessibility  
-- Add `fit-content` width/height  
-- Gradient background support  
-- Link support  
-
-### 1.2.0
-- Rename plugin, slug, textdomain  
-- WPCS and ESLint fixes  
-- Block preview  
-
-### 1.1.0
-- Full i18n with Hungarian  
-- WordPress.org Plugin Check compliant  
-
-### 1.0.0
-- Initial release  
+[Changelog is there](https://wordpress.org/plugins/svg-block-for-dashicon-rotistudio/#developers)
