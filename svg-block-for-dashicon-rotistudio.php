@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: SVG Block for Dashicons by RotiStudio
+ * Plugin Name: SVG Block for Dashicons
  * Plugin URI: https://rotistudio.hu/bovitmenyek/dashicon-svg-block/
  * Description: Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SVG — fast, lightweight, and fully customizable.
- * Version: 1.3.0
+ * Version: 1.3.1
  * Requires at least: 5.9
  * Requires PHP: 7.4
- * Author: RotiSoft
- * Author URI: https://rotisoft.hu
+ * Author: RotiStudio - Tamas Rottenbacher
+ * Author URI: https://rotistudio.hu
  * License: GPLv2 or later
  * Text Domain: svg-block-for-dashicon-rotistudio
  * Domain Path: /languages
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RSDSB_VERSION', '1.3.0' );
+define( 'RSDSB_VERSION', '1.3.1' );
 define( 'RSDSB_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RSDSB_URL', plugin_dir_url( __FILE__ ) );
 
@@ -380,4 +380,3 @@ function rsdsb_get_dashicon_svg_paths() {
 
 	return $paths;
 }
-

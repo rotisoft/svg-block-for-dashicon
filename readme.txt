@@ -1,13 +1,13 @@
 === SVG Block for Dashicons by RotiStudio ===
-Contributors: rtomo
+Contributors: rtomo, rotistudio
 Tags: dashicons, svg, gutenberg, block, icons
 Requires at least: 5.9
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Donate link: https://rotisoft.hu/kapcsolat/
+Donate link: https://rotistudio.hu/kapcsolat/
 
 Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SVG — fast, lightweight, and fully customizable.
 
@@ -49,7 +49,7 @@ The Dashicons picker block uses a fast, familiar UI. Simple and consistent to us
 **In your own language**
 The plugin can be easily and quickly translated on the official translate.wordpress.org platform, making it even easier to use in your own language.
 
-Do you have other plugins? Yes, check my plugins website: [rotistudio.hu](https://rotistudio.hu/)
+Do you have other plugins? Yes, check my plugins website: [rotistudio.com](https://rotistudio.com/)
 Where can we learn more about your work? Check my personal website there: [rottenbacher.hu](https://rottenbacher.hu/)
 
 == Installation ==
@@ -108,6 +108,10 @@ Unfortunately no, this is specifically designed for the Gutenberg editor.
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+* WordPress 7.0 compatibility check
+* PHP 8.5 compatibility check
+
 = 1.3.0 =
 * Fix 100% border-radius.
 * Fix the original SVG paths for the 4 admin-site icons.
@@ -129,6 +133,10 @@ Unfortunately no, this is specifically designed for the Gutenberg editor.
 * Initial release.
 
 == Changelog ==
+
+= 1.3.1 =
+* WordPress 7.0 compatibility check
+* PHP 8.5 compatibility check
 
 = 1.3.0 =
 * Fix 100% border-radius.
