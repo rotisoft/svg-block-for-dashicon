@@ -5,9 +5,9 @@ Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SV
 **Contributors:** [Tamas Rottenbacher](https://profiles.wordpress.org/rtomo/)  
 **Tags:** dashicons, svg, gutenberg, block, icons  
 **Requires at least:** 5.9  
-**Tested up to:** 6.9  
+**Tested up to:** 7.0  
 **Requires PHP:** 7.4  
-**Stable version:** 1.3.0  
+**Stable version:** 1.3.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 **Donate:** [rotistudio.hu](https://rotistudio.hu/kapcsolat/)
