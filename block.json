@@ -1,0 +1,70 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "rsdsb/dashicon",
+	"version": "1.4.0",
+	"title": "SVG block for Dashicon",
+	"category": "common",
+	"icon": "smiley",
+	"description": "Insert a WordPress Dashicon rendered as inline SVG.",
+	"keywords": [ "icon", "dashicon", "svg" ],
+	"textdomain": "svg-block-for-dashicon-rotistudio",
+	"editorScript": "rsdsb-dashicons-svg-block-editor",
+	"editorStyle": "rsdsb-dashicons-svg-block-editor",
+	"attributes": {
+		"icon": {
+			"type": "string",
+			"default": "admin-home"
+		},
+		"size": {
+			"type": "number",
+			"default": 20
+		},
+		"sizeUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"align": {
+			"type": "string",
+			"default": "none"
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkTarget": {
+			"type": "string",
+			"default": ""
+		},
+		"linkRel": {
+			"type": "string",
+			"default": ""
+		},
+		"linkLabel": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"color": {
+			"text": true,
+			"background": true,
+			"gradients": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
+		},
+		"__experimentalBorder": {
+			"radius": true
+		}
+	},
+	"example": {
+		"attributes": {
+			"icon": "star-filled",
+			"size": 48,
+			"sizeUnit": "px",
+			"align": "center"
+		}
+	}
+}

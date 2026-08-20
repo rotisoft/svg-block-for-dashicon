@@ -362,315 +362,243 @@
 		);
 	}
 
-	registerBlockType('rsdsb/dashicon', {
-		title: __('SVG block for Dashicon', 'svg-block-for-dashicon-rotistudio'),
-		description: __(
-			'Insert a WordPress Dashicon rendered as inline SVG.',
-			'svg-block-for-dashicon-rotistudio'
-		),
-		icon: 'smiley',
-		category: 'common',
-		keywords: [
-			__('icon', 'svg-block-for-dashicon-rotistudio'),
-			__('dashicon', 'svg-block-for-dashicon-rotistudio'),
-			__('svg', 'svg-block-for-dashicon-rotistudio'),
-		],
+	// Metadata (title, attributes, supports, example) comes from block.json.
+	registerBlockType( 'rsdsb/dashicon', {
+		edit( props ) {
+			const { attributes, setAttributes } = props;
 
-		attributes: {
-			icon: {
-				type: 'string',
-				default: 'admin-home',
-			},
-			size: {
-				type: 'number',
-				default: 20,
-			},
-			sizeUnit: {
-				type: 'string',
-				default: 'px',
-			},
-			align: {
-				type: 'string',
-				default: 'none',
-			},
-			linkUrl: {
-				type: 'string',
-				default: '',
-			},
-			linkTarget: {
-				type: 'string',
-				default: '',
-			},
-			linkRel: {
-				type: 'string',
-				default: '',
-			},
-			linkLabel: {
-				type: 'string',
-				default: '',
-			},
-		},
+			// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
+			const [ isLinkOpen, setIsLinkOpen ] = useState( false );
 
-		example: {
-			attributes: {
-				icon: 'star-filled',
-				size: 48,
-				sizeUnit: 'px',
-				align: 'center',
-			},
-		},
+			// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
+			const blockProps = useBlockProps( {
+				className:
+					'none' !== attributes.align
+						? 'align' + attributes.align
+						: '',
+			} );
 
-		supports: {
-			color: {
-				text: true,
-				background: true,
-				gradients: true,
-			},
-			spacing: {
-				padding: true,
-				margin: true,
-			},
-			__experimentalBorder: {
-				radius: true,
-			},
-		},
+			// Split WordPress-generated styles: visual ones go to inner wrapper, color to SVG.
+			const wpStyles = blockProps.style || {};
+			const { svgOnly, wrapperOnly } = splitStyles( wpStyles );
 
-	edit( props ) {
-		const { attributes, setAttributes } = props;
+			// Outer div: blockProps without visual inline styles (stripped via editor CSS).
+			blockProps.style = {};
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
-		const [ isLinkOpen, setIsLinkOpen ] = useState( false );
+			// Inner wrapper styles.
+			const centerStyles =
+				'center' === attributes.align
+					? {
+							marginRight: wrapperOnly.marginRight || 'auto',
+							marginLeft: wrapperOnly.marginLeft || 'auto',
+						}
+					: {};
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
-		const blockProps = useBlockProps( {
-			className:
-				'none' !== attributes.align
-					? 'align' + attributes.align
-					: '',
-		} );
+			const innerStyle = Object.assign(
+				{},
+				wrapperOnly,
+				{ width: 'fit-content', height: 'fit-content', lineHeight: 0 },
+				centerStyles
+			);
 
-		// Split WordPress-generated styles: visual ones go to inner wrapper, color to SVG.
-		const wpStyles = blockProps.style || {};
-		const { svgOnly, wrapperOnly } = splitStyles( wpStyles );
-
-		// Outer div: blockProps without visual inline styles (stripped via editor CSS).
-		blockProps.style = {};
-
-		// Inner wrapper styles.
-		const centerStyles =
-			'center' === attributes.align
-				? {
-						marginRight: wrapperOnly.marginRight || 'auto',
-						marginLeft: wrapperOnly.marginLeft || 'auto',
-					}
-				: {};
-
-		const innerStyle = Object.assign(
-			{},
-			wrapperOnly,
-			{ width: 'fit-content', height: 'fit-content', lineHeight: 0 },
-			centerStyles
-		);
-
-		// Preset gradient: add as inline value (class-based gradient is stripped from outer div).
-		if ( ! innerStyle.background && attributes.gradient ) {
-			innerStyle.background = 'var(--wp--preset--gradient--' + attributes.gradient + ')';
-		}
-
-		// Preset background color: add as inline value.
-		if ( ! innerStyle.backgroundColor && attributes.backgroundColor ) {
-			innerStyle.backgroundColor = 'var(--wp--preset--color--' + attributes.backgroundColor + ')';
-		}
-
-		// Apply inner wrapper styles with !important via DOM API.
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
-		const innerRef = useRef( null );
-
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
-		useEffect( function () {
-			var node = innerRef.current;
-			if ( ! node ) {
-				return;
+			// Preset gradient: add as inline value (class-based gradient is stripped from outer div).
+			if ( ! innerStyle.background && attributes.gradient ) {
+				innerStyle.background = 'var(--wp--preset--gradient--' + attributes.gradient + ')';
 			}
-			var cssText = '';
-			for ( var styleKey in innerStyle ) {
-				if ( innerStyle.hasOwnProperty( styleKey ) ) {
-					var cssKey = styleKey.replace( /([A-Z])/g, '-$1' ).toLowerCase();
-					var val = innerStyle[ styleKey ];
-					if ( typeof val === 'number' ) {
-						val = String( val );
-					}
-					cssText += cssKey + ': ' + val + ' !important; ';
+
+			// Preset background color: add as inline value.
+			if ( ! innerStyle.backgroundColor && attributes.backgroundColor ) {
+				innerStyle.backgroundColor = 'var(--wp--preset--color--' + attributes.backgroundColor + ')';
+			}
+
+			// Apply inner wrapper styles with !important via DOM API.
+			// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
+			const innerRef = useRef( null );
+
+			// eslint-disable-next-line react-hooks/rules-of-hooks -- WP block API requires lowercase 'edit'.
+			useEffect( function () {
+				var node = innerRef.current;
+				if ( ! node ) {
+					return;
 				}
-			}
-			node.style.cssText = cssText;
-		} );
+				var cssText = '';
+				for ( var styleKey in innerStyle ) {
+					if ( innerStyle.hasOwnProperty( styleKey ) ) {
+						var cssKey = styleKey.replace( /([A-Z])/g, '-$1' ).toLowerCase();
+						var val = innerStyle[ styleKey ];
+						if ( typeof val === 'number' ) {
+							val = String( val );
+						}
+						cssText += cssKey + ': ' + val + ' !important; ';
+					}
+				}
+				node.style.cssText = cssText;
+			} );
 
-		return el(
-			Fragment,
-			null,
-			el(
-				BlockControls,
+			return el(
+				Fragment,
 				null,
 				el(
-					ToolbarGroup,
+					BlockControls,
 					null,
-					el( ToolbarButton, {
-						icon: linkIcon,
-						title: __( 'Link' ),
-						onClick() {
-							setIsLinkOpen( ! isLinkOpen );
-						},
-						isActive: !! attributes.linkUrl,
-					} )
-				)
-			),
-			isLinkOpen && el(
-				Popover,
-				{
-					position: 'bottom center',
-					onClose() {
-						setIsLinkOpen( false );
-					},
-					anchor: innerRef.current,
-					focusOnMount: 'firstElement',
-				},
-				el( LinkControl, {
-					value: {
-						url: attributes.linkUrl || '',
-						opensInNewTab: '_blank' === attributes.linkTarget,
-						noFollow: -1 !== ( attributes.linkRel || '' ).indexOf( 'nofollow' ),
-					},
-					settings: [
-						{
-							id: 'opensInNewTab',
-							title: __( 'Open in new tab' ),
-						},
-						{
-							id: 'noFollow',
-							title: __( 'Mark as nofollow' ),
-						},
-					],
-					onChange( nextValue ) {
-						var relParts = [];
-						if ( nextValue.opensInNewTab ) {
-							relParts.push( 'noopener' );
-						}
-						if ( nextValue.noFollow ) {
-							relParts.push( 'nofollow' );
-						}
-						setAttributes( {
-							linkUrl: nextValue.url || '',
-							linkTarget: nextValue.opensInNewTab ? '_blank' : '',
-							linkRel: relParts.length ? relParts.join( ' ' ) : '',
-						} );
-					},
-					onRemove() {
-						setAttributes( {
-							linkUrl: '',
-							linkTarget: '',
-							linkRel: '',
-						} );
-						setIsLinkOpen( false );
-					},
-				} )
-			),
-			el(
-				InspectorControls,
-				null,
-				el(
-					PanelBody,
+					el(
+						ToolbarGroup,
+						null,
+						el( ToolbarButton, {
+							icon: linkIcon,
+							title: __( 'Link' ),
+							onClick() {
+								setIsLinkOpen( ! isLinkOpen );
+							},
+							isActive: !! attributes.linkUrl,
+						} )
+					)
+				),
+				isLinkOpen && el(
+					Popover,
 					{
-						title: __(
-							'Dashicon settings',
-							'svg-block-for-dashicon-rotistudio'
-						),
-						__nextHasNoMarginBottom: true,
+						position: 'bottom center',
+						onClose() {
+							setIsLinkOpen( false );
+						},
+						anchor: innerRef.current,
+						focusOnMount: 'firstElement',
 					},
-					el( IconPickerControl, {
-						label: __( 'Icon', 'svg-block-for-dashicon-rotistudio' ),
-						value: attributes.icon,
-						onChange( newIcon ) {
-							setAttributes( { icon: newIcon } );
+					el( LinkControl, {
+						value: {
+							url: attributes.linkUrl || '',
+							opensInNewTab: '_blank' === attributes.linkTarget,
+							noFollow: -1 !== ( attributes.linkRel || '' ).indexOf( 'nofollow' ),
+						},
+						settings: [
+							{
+								id: 'opensInNewTab',
+								title: __( 'Open in new tab' ),
+							},
+							{
+								id: 'noFollow',
+								title: __( 'Mark as nofollow' ),
+							},
+						],
+						onChange( nextValue ) {
+							var relParts = [];
+							if ( nextValue.opensInNewTab ) {
+								relParts.push( 'noopener' );
+							}
+							if ( nextValue.noFollow ) {
+								relParts.push( 'nofollow' );
+							}
+							setAttributes( {
+								linkUrl: nextValue.url || '',
+								linkTarget: nextValue.opensInNewTab ? '_blank' : '',
+								linkRel: relParts.length ? relParts.join( ' ' ) : '',
+							} );
+						},
+						onRemove() {
+							setAttributes( {
+								linkUrl: '',
+								linkTarget: '',
+								linkRel: '',
+							} );
+							setIsLinkOpen( false );
 						},
 					} )
 				),
 				el(
-					PanelBody,
-					{
-						title: __( 'Link settings', 'svg-block-for-dashicon-rotistudio' ),
-						initialOpen: false,
-						__nextHasNoMarginBottom: true,
-					},
-					el( TextControl, {
-						label: __( 'Link label (aria-label)', 'svg-block-for-dashicon-rotistudio' ),
-						help: __( 'Descriptive text for screen readers, e.g. "Go to homepage".', 'svg-block-for-dashicon-rotistudio' ),
-						value: attributes.linkLabel || '',
-						onChange( val ) {
-							setAttributes( { linkLabel: val } );
+					InspectorControls,
+					null,
+					el(
+						PanelBody,
+						{
+							title: __(
+								'Dashicon settings',
+								'svg-block-for-dashicon-rotistudio'
+							),
+							__nextHasNoMarginBottom: true,
 						},
-						__nextHasNoMarginBottom: true,
-						__next40pxDefaultSize: true,
-					} )
-				)
-			),
-			el(
-				InspectorControls,
-				{ group: 'styles' },
+						el( IconPickerControl, {
+							label: __( 'Icon', 'svg-block-for-dashicon-rotistudio' ),
+							value: attributes.icon,
+							onChange( newIcon ) {
+								setAttributes( { icon: newIcon } );
+							},
+						} )
+					),
+					el(
+						PanelBody,
+						{
+							title: __( 'Link settings', 'svg-block-for-dashicon-rotistudio' ),
+							initialOpen: false,
+							__nextHasNoMarginBottom: true,
+						},
+						el( TextControl, {
+							label: __( 'Link label (aria-label)', 'svg-block-for-dashicon-rotistudio' ),
+							help: __( 'Descriptive text for screen readers, e.g. "Go to homepage".', 'svg-block-for-dashicon-rotistudio' ),
+							value: attributes.linkLabel || '',
+							onChange( val ) {
+								setAttributes( { linkLabel: val } );
+							},
+							__nextHasNoMarginBottom: true,
+							__next40pxDefaultSize: true,
+						} )
+					)
+				),
 				el(
-					PanelBody,
-					{
-						title: __( 'Icon styles', 'svg-block-for-dashicon-rotistudio' ),
-						initialOpen: true,
-						__nextHasNoMarginBottom: true,
-					},
-					el( SizeUnitControl, {
-						label: __( 'Size', 'svg-block-for-dashicon-rotistudio' ),
-						value: attributes.size,
-						unit: attributes.sizeUnit,
-						onChangeValue( newSize ) {
-							setAttributes( { size: newSize } );
+					InspectorControls,
+					{ group: 'styles' },
+					el(
+						PanelBody,
+						{
+							title: __( 'Icon styles', 'svg-block-for-dashicon-rotistudio' ),
+							initialOpen: true,
+							__nextHasNoMarginBottom: true,
 						},
-						onChangeUnit( newUnit ) {
-							setAttributes( { sizeUnit: newUnit } );
-						},
-					} ),
-					el( AlignmentControl, {
-						label: __( 'Alignment', 'svg-block-for-dashicon-rotistudio' ),
-						value: attributes.align,
-						onChange( newAlign ) {
-							setAttributes( { align: newAlign } );
-						},
-					} )
-				)
-			),
-			el(
-				'div',
-				blockProps,
+						el( SizeUnitControl, {
+							label: __( 'Size', 'svg-block-for-dashicon-rotistudio' ),
+							value: attributes.size,
+							unit: attributes.sizeUnit,
+							onChangeValue( newSize ) {
+								setAttributes( { size: newSize } );
+							},
+							onChangeUnit( newUnit ) {
+								setAttributes( { sizeUnit: newUnit } );
+							},
+						} ),
+						el( AlignmentControl, {
+							label: __( 'Alignment', 'svg-block-for-dashicon-rotistudio' ),
+							value: attributes.align,
+							onChange( newAlign ) {
+								setAttributes( { align: newAlign } );
+							},
+						} )
+					)
+				),
 				el(
 					'div',
-					{
-						ref: innerRef,
-						className: 'rsdsb-inner-wrapper',
-						role: 'presentation',
-					},
-					renderSvg(
-						attributes.icon,
-						attributes.size,
-						attributes.sizeUnit,
-						svgOnly
+					blockProps,
+					el(
+						'div',
+						{
+							ref: innerRef,
+							className: 'rsdsb-inner-wrapper',
+							role: 'presentation',
+						},
+						renderSvg(
+							attributes.icon,
+							attributes.size,
+							attributes.sizeUnit,
+							svgOnly
+						)
 					)
 				)
-			)
-		);
-	},
+			);
+		},
 
 		// Dynamic block rendered in PHP.
 		save() {
 			return null;
 		},
-	});
-
+	} );
 })();
 
 

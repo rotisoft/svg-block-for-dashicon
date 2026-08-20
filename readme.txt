@@ -2,9 +2,9 @@
 Contributors: rtomo, rotistudio
 Tags: dashicons, svg, gutenberg, block, icons
 Requires at least: 5.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://rotistudio.hu/kapcsolat/
@@ -33,6 +33,9 @@ The plugin does not rely on the traditional icon rendering approach (CSS-based i
 
 **Icons the way Gutenberg expects**
 The Dashicons set is finally available as a native block element. No HTML hacks, no font dependency — just clean inline SVG markup directly from the editor.
+
+**Works with the core Icon block (WordPress 7.1+)**
+On WordPress 7.1 and newer, all 334 Dashicons are also registered with the core Icons API. They appear in the core Icon block's Icon Library under a dedicated "Dashicons" collection tab, so you can use them with the native Icon block as well - no extra setup needed.
 
 **Faster loading, more stable layout**
 Instead of downloading and rendering icon fonts, icons appear instantly in the HTML. No FOIT, no CSS pseudo-elements, no CLS risk — better Core Web Vitals and predictable rendering.
@@ -100,6 +103,10 @@ Yes. The plugin is fully internationalized and ready for translation. Hungarian 
 
 Unfortunately no, this is specifically designed for the Gutenberg editor.
 
+= Do the icons work with the core Icon block? =
+
+Yes, on WordPress 7.1 and newer. The plugin registers all 334 Dashicons with the WordPress Icons API, so they show up in the core Icon block's Icon Library under a "Dashicons" collection tab. On older WordPress versions the plugin's own block keeps working, only the core Icon block integration is skipped.
+
 == Screenshots ==
 
 1. Rendered inline SVG icon on the frontend.
@@ -107,6 +114,10 @@ Unfortunately no, this is specifically designed for the Gutenberg editor.
 3. Customization options: color, size, background, spacing, and border.
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+* All 334 Dashicons now also appear in the core Icon block (WordPress 7.1+) under a dedicated "Dashicons" collection.
+* Block registration migrated to block.json - no changes to existing content.
 
 = 1.3.1 =
 * WordPress 7.0 compatibility check
@@ -133,6 +144,10 @@ Unfortunately no, this is specifically designed for the Gutenberg editor.
 * Initial release.
 
 == Changelog ==
+
+= 1.4.0 =
+* Add core Icon block integration: all 334 Dashicons are registered with the WordPress 7.1+ Icons API under a "Dashicons" collection.
+* Migrate block registration to block.json: block metadata (attributes, supports, example) now lives in a single source instead of being duplicated in PHP and JavaScript. Existing content is not affected.
 
 = 1.3.1 =
 * WordPress 7.0 compatibility check

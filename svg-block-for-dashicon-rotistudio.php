@@ -3,7 +3,7 @@
  * Plugin Name: SVG Block for Dashicons
  * Plugin URI: https://rotistudio.hu/bovitmenyek/dashicon-svg-block/
  * Description: Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SVG — fast, lightweight, and fully customizable.
- * Version: 1.3.1
+ * Version: 1.4.0
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: RotiStudio - Tamas Rottenbacher
@@ -19,9 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RSDSB_VERSION', '1.3.1' );
+define( 'RSDSB_VERSION', '1.4.0' );
 define( 'RSDSB_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RSDSB_URL', plugin_dir_url( __FILE__ ) );
+
+// Register Dashicons with the core Icons API (WP 7.1+) for the core Icon block.
+require_once RSDSB_PATH . 'includes/icon-registration.php';
 
 /**
  * Register Dashicons SVG block.
@@ -66,60 +69,11 @@ function rsdsb_register_dashicons_svg_block() {
 		RSDSB_PATH . 'languages'
 	);
 
+	// Register from block.json; keep PHP render for the dynamic frontend output.
 	register_block_type(
-		'rsdsb/dashicon',
+		RSDSB_PATH,
 		array(
-			'editor_script'   => 'rsdsb-dashicons-svg-block-editor',
-			'editor_style'    => 'rsdsb-dashicons-svg-block-editor',
 			'render_callback' => 'rsdsb_render_dashicon_block',
-			'attributes'      => array(
-				'icon'       => array(
-					'type'    => 'string',
-					'default' => 'admin-home',
-				),
-				'size'       => array(
-					'type'    => 'number',
-					'default' => 20,
-				),
-				'sizeUnit'   => array(
-					'type'    => 'string',
-					'default' => 'px',
-				),
-				'align'      => array(
-					'type'    => 'string',
-					'default' => 'none',
-				),
-				'linkUrl'    => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'linkTarget' => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'linkRel'    => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-				'linkLabel'  => array(
-					'type'    => 'string',
-					'default' => '',
-				),
-			),
-			'supports'        => array(
-				'color'   => array(
-					'text'       => true,
-					'background' => true,
-					'gradients'  => true,
-				),
-				'spacing' => array(
-					'padding' => true,
-					'margin'  => true,
-				),
-				'__experimentalBorder' => array(
-					'radius' => true,
-				),
-			),
 		)
 	);
 }
