@@ -5,9 +5,9 @@ Adds a native Gutenberg block for inserting 334 WordPress Dashicons as inline SV
 **Contributors:** [Tamas Rottenbacher](https://profiles.wordpress.org/rtomo/)  
 **Tags:** dashicons, svg, gutenberg, block, icons  
 **Requires at least:** 5.9  
-**Tested up to:** 7.0  
+**Tested up to:** 7.1  
 **Requires PHP:** 7.4  
-**Stable version:** 1.3.1  
+**Stable version:** 1.4.0  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 **Donate:** [rotistudio.hu](https://rotistudio.hu/kapcsolat/)
@@ -57,7 +57,7 @@ The Dashicons picker block uses a fast, familiar UI. Simple and consistent to us
 
 The plugin can be easily and quickly translated on the official translate.wordpress.org platform, making it even easier to use in your own language.
 
-Do you have other plugins? Yes, check: https://rotistudio.hu/  
+Do you have other plugins? Yes, check: https://rotistudio.com/  
 More about my work: https://rottenbacher.hu/
 
 ## Installation
@@ -107,6 +107,10 @@ Yes. Fully internationalized. Hungarian included. WordPress 4.6+ loads translati
 ### Compatible with Classic Editor?
 
 No. Gutenberg-only block.
+
+### Do the icons work with the core Icon block?
+
+Yes, on WordPress 7.1 and newer. The plugin registers all 334 Dashicons with the WordPress Icons API, so they show up in the core Icon block's Icon Library under a "Dashicons" collection tab. On older WordPress versions the plugin's own block keeps working, only the core Icon block integration is skipped.
 
 ## Changelog
 
